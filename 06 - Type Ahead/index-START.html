@@ -18,11 +18,11 @@
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
-const cities = [];
+const cities = []; //empty array
 
 fetch(endpoint)
   .then(blob => blob.json())
-  .then(data => cities.push(...data));
+  .then(data => cities.push(...data)); // spreads the data into the array / can't push
 
 </script>
 </body>
