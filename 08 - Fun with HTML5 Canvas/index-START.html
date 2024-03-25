@@ -22,13 +22,27 @@ let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
 
+let hue = 0;
+let direction = true;
+
 function draw(e) {
   if (!isDrawing) return; // stop the function from running when they are NOT moused down
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`; // hsl. starting at 0, which is red. it'll go through all the colors then loop back around to red. 
   ctx.beginPath();
   ctx.moveTo(lastX, lastY);
   ctx.lineTo(e.offsetX, e.offsetY);
   ctx.stroke();
   [lastX, lastY] = [e.offsetX, e.offsetY];
+  hue++; //increment the hue per instance of click, which is constant. causes color shift.
+
+  if (ctx.lineWidth >= 50 || ctx.lineWidth <= 5) { //loop keeps the width between 1 and 100, flipping when it reaches either extreme
+    direction = !direction;
+  }
+  if (direction) {
+    ctx.lineWidth++;
+  } else {
+    ctx.lineWidth--;
+  }
 }
 
 canvas.addEventListener('mousemove', draw);
